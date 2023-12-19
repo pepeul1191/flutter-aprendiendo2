@@ -17,3 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 
 $ flutter create --platforms=android dr_gym
+
+https://medium.com/flutterworld/flutter-mvvm-architecture-f8bed2521958

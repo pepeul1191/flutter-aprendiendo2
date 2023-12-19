@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import '../screens/sign_in_screen.dart';
-import '../view_models/login_form_view_model.dart';
+import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../sign_in_screen.dart';
+import './login_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginPage extends StatelessWidget {
+  LoginController control = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +18,7 @@ class LoginScreen extends StatelessWidget {
               child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/login.png'),
+                      image: AssetImage('assets/images/login-portrait.png'),
                       fit: BoxFit
                           .cover, // Ajustar la imagen al tamaño del Container
                     ),
@@ -31,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                       padding: EdgeInsets.all(30.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
+                        children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(
                                 bottom:
@@ -51,19 +54,23 @@ class LoginScreen extends StatelessWidget {
                               labelText: 'Usuario',
                               border: OutlineInputBorder(),
                             ),
+                            controller: control.userController,
+                            onChanged: (value) {},
                           ),
                           SizedBox(height: 10),
                           TextFormField(
                             obscureText: true,
+                            controller: control.passwordController,
                             decoration: InputDecoration(
                               labelText: 'Contraseña',
                               border: OutlineInputBorder(),
                             ),
+                            onChanged: (value) {},
                           ),
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
-                              print('LOGIN!!!');
+                              control.login();
                             },
                             style: ElevatedButton.styleFrom(
                               minimumSize: Size(double.infinity, 50),

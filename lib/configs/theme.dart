@@ -18,7 +18,7 @@ const MaterialColor secondaryColor =
     MaterialColor(0xfc465594, myColorMap); // Color primario
 
 final appTheme = () => ThemeData.from(
-      colorScheme: ColorScheme.light(),
+      colorScheme: ColorScheme.light(primary: primaryColor),
     ).copyWith(
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
