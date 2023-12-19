@@ -26,6 +26,12 @@ final appTheme = () => ThemeData.from(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
+          textStyle: TextStyle(
+            // Cambiar color del texto
+            color: Colors.black, // Color del texto del botón
+            fontSize: 18.0,
+            // Otros estilos de texto si es necesario
+          ),
         ),
       ),
     );

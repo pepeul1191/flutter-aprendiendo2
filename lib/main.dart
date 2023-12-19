@@ -1,6 +1,7 @@
 import 'package:dr_gym/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'configs/theme.dart';
+import 'package:flutter/services.dart'; // Importa el paquete SystemChrome
 
 void main() {
   runApp(MyApp());
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.amberAccent));
     return MaterialApp(title: 'Login', theme: appTheme(), home: LoginScreen());
   }
 }
