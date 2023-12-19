@@ -1,3 +1,4 @@
+import 'package:dr_gym/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,18 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hello World App'),
-        ),
-        body: Center(
-          child: Text(
-            'Hello, World!',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-      ),
-    );
+    return MaterialApp(title: 'Login', home: LoginScreen());
   }
 }
