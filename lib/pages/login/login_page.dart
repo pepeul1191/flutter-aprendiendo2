@@ -158,7 +158,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _image(BuildContext conext) {
+  Widget _imagePortrait(BuildContext conext) {
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -169,18 +169,59 @@ class LoginPage extends StatelessWidget {
         child: null);
   }
 
+  Widget _imageLandscape(BuildContext conext) {
+    return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/login-landscape.png'),
+            fit: BoxFit.cover, // Ajustar la imagen al tamaño del Container
+          ),
+        ),
+        child: null);
+  }
+
+  Widget _buildBody(Orientation orientation, BuildContext context) {
+    if (orientation == Orientation.portrait) {
+      return SafeArea(
+        child: Column(children: [
+          Expanded(
+            flex: 1,
+            child: _imagePortrait(context),
+          ),
+          Expanded(flex: 1, child: _form(context)),
+        ]),
+      );
+    } else {
+      return SafeArea(
+        child: Row(children: [
+          Expanded(
+            flex: 1,
+            child: _imageLandscape(context),
+          ),
+          Expanded(flex: 1, child: _form(context)),
+        ]),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: null,
-        body: SafeArea(
-          child: Column(children: [
-            Expanded(
-              flex: 1,
-              child: _image(context),
-            ),
-            Expanded(flex: 1, child: _form(context)),
-          ]),
-        ));
+        body: OrientationBuilder(builder: (context, orientation) {
+          return _buildBody(orientation, context);
+        }));
   }
 }
+
+/*
+OrientationBuilder(
+        builder: (context, orientation) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Cambio de Orientación'),
+            ),
+            body: _buildBody(orientation),
+          );
+        },
+ */
