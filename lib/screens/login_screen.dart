@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/sign_in_screen.dart';
+import '../view_models/login_form_view_model.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class LoginScreen extends StatelessWidget {
           child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/vector-1.png'),
+                  image: AssetImage('assets/images/login.png'),
                   fit:
                       BoxFit.cover, // Ajustar la imagen al tamaño del Container
                 ),
@@ -63,12 +64,7 @@ class LoginScreen extends StatelessWidget {
                           print('LOGIN!!!');
                         },
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size(
-                              double.infinity, 50), // Ancho y alto del botón
-                          shape: RoundedRectangleBorder(
-                            // Personalizar los bordes
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
+                          minimumSize: Size(double.infinity, 50),
                         ),
                         child: Text('Ingresar'),
                       ),
@@ -118,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         'Recuperar Contraseña',
-                                        textAlign: TextAlign.left,
+                                        textAlign: TextAlign.right,
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,

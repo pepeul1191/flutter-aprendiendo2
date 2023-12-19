@@ -1,5 +1,6 @@
 import 'package:dr_gym/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'configs/theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,12 +12,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Login',
-        theme: ThemeData(
-          primarySwatch: primaryColor, // Configuración del color primario
-          //accentColor: secondaryColor, // Configuración del color secundario
-        ),
-        home: LoginScreen());
+    return MaterialApp(title: 'Login', theme: appTheme(), home: LoginScreen());
   }
 }
