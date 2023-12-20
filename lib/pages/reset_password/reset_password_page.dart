@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../sign_in_screen.dart';
 import '../../configs/theme.dart';
-import './login_controller.dart';
+import './reset_password_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginController control = Get.put(LoginController());
+class ResetPasswordPage extends StatelessWidget {
+  ResetPasswordController control = Get.put(ResetPasswordController());
 
   Widget _form(BuildContext context) {
     return SingleChildScrollView(
         child: Container(
+      margin: EdgeInsets.only(bottom: 30.0),
       color: Colors.white,
       child: Padding(
           padding: EdgeInsets.all(30.0),
@@ -24,7 +25,7 @@ class LoginPage extends StatelessWidget {
                         20.0), // Margen inferior de 20.0 (puedes ajustar este valor)
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Bienvenido',
+                  'Cambie su contraseña',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -34,18 +35,18 @@ class LoginPage extends StatelessWidget {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Usuario',
+                  labelText: 'DNI',
                   border: OutlineInputBorder(),
                 ),
-                controller: control.userController,
+                controller: control.dniController,
                 onChanged: (value) {},
               ),
               SizedBox(height: 10),
               TextFormField(
-                obscureText: true,
-                controller: control.passwordController,
+                keyboardType: TextInputType.emailAddress,
+                controller: control.emailController,
                 decoration: InputDecoration(
-                  labelText: 'Contraseña',
+                  labelText: 'Correo',
                   border: OutlineInputBorder(),
                 ),
                 onChanged: (value) {},
@@ -53,51 +54,17 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  control.login();
+                  control.resetPassword();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
                   backgroundColor: secondaryColor,
                 ),
                 child: Text(
-                  'Ingresar',
+                  'Enviar Solicitud',
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              Container(
-                  margin: EdgeInsets.only(
-                      top: 10.0,
-                      bottom:
-                          30.0), // Ajusta el margen superior e inferior aquí
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('GOOGLE!!!');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 6, 132,
-                          71), // Estilos del ElevatedButton, si es necesario
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Icon(
-                          FontAwesomeIcons
-                              .google, // Icono que se muestra a la izquierda del texto
-                          // Otros atributos del icono si es necesario
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                            width: 8), // Espaciado entre el icono y el texto
-                        Text(
-                          'Ingresar con Google', // Texto que se muestra a la derecha del icono
-                          // Otros atributos del texto si es necesario
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  )),
               _links(context),
             ],
           )),
@@ -107,6 +74,7 @@ class LoginPage extends StatelessWidget {
   Widget _links(BuildContext context) {
     return Container(
       height: 20,
+      margin: EdgeInsets.only(top: 30.0),
       child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
         Row(
           children: [
@@ -115,11 +83,11 @@ class LoginPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   // Acciones a realizar cuando se haga clic en el Text
-                  control.goToSignUpPage(context);
+                  control.goToLoginPage(context);
                   // Puedes agregar cualquier acción que desees realizar aquí
                 },
                 child: Text(
-                  'Crear Cuenta',
+                  'Iniciar Sesión',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 16,
@@ -138,11 +106,11 @@ class LoginPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => SignInScreen()),
                   );*/
-                  control.goToResetPasswordPage(context);
+                  control.goToSignUpPage(context);
                   // Puedes agregar cualquier acción que desees realizar aquí
                 },
                 child: Text(
-                  'Recuperar Contraseña',
+                  'Crear Cuenta',
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     fontSize: 16,

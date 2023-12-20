@@ -13,9 +13,8 @@ const Map<int, Color> myColorMap = {
   900: Color.fromRGBO(0, 128, 255, 1), // 100% opacidad
 };
 
-const MaterialColor primaryColor = MaterialColor(0xfcfcd940, myColorMap);
-const MaterialColor secondaryColor =
-    MaterialColor(0xfc465594, myColorMap); // Color primario
+const MaterialColor primaryColor = MaterialColor(0xfc465594, myColorMap);
+const MaterialColor secondaryColor = MaterialColor(0xfcfcd940, myColorMap);
 
 final appTheme = () => ThemeData.from(
       colorScheme: ColorScheme.light(primary: primaryColor),

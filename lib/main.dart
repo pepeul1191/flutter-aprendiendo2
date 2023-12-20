@@ -13,8 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.amberAccent));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        //statusBarColor: Colors.amberAccent,
+        systemStatusBarContrastEnforced: true));
     return MaterialApp(title: 'Login', theme: appTheme(), home: LoginPage());
   }
 }
