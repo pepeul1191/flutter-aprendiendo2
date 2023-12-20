@@ -34,10 +34,10 @@ class SignUpPage extends StatelessWidget {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'DNI',
+                  labelText: 'Usuario',
                   border: OutlineInputBorder(),
                 ),
-                controller: control.dniController,
+                controller: control.userController,
                 onChanged: (value) {},
               ),
               SizedBox(height: 10),
@@ -50,23 +50,113 @@ class SignUpPage extends StatelessWidget {
                 ),
                 onChanged: (value) {},
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
+              TextFormField(
+                obscureText: true,
+                controller: control.password1Controller,
+                decoration: InputDecoration(
+                  labelText: 'Contraseña',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {},
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                obscureText: true,
+                controller: control.password2Controller,
+                decoration: InputDecoration(
+                  labelText: 'Repita su contraseña',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {},
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Checkbox(
+                    value: false,
+                    onChanged: (value) {},
+                  ),
+                  Expanded(
+                    child: Text(
+                      'He leido y acepto los Términos y Condiciones',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5),
               ElevatedButton(
-                onPressed: () {
-                  control.signUp();
-                },
+                onPressed: null,
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
                   backgroundColor: secondaryColor,
                 ),
                 child: Text(
-                  'Enviar Solicitud',
+                  'Crear Cuenta',
                   style: TextStyle(color: Colors.black),
                 ),
               ),
+              _links(context)
             ],
           )),
     ));
+  }
+
+  Widget _links(BuildContext context) {
+    return Container(
+      height: 20,
+      margin: EdgeInsets.only(top: 30.0),
+      child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+        Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  // Acciones a realizar cuando se haga clic en el Text
+                  control.goToLoginPage(context);
+                  // Puedes agregar cualquier acción que desees realizar aquí
+                },
+                child: Text(
+                  'Iniciar Sesión',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  // Acciones a realizar cuando se haga clic en el Text
+                  /*Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                  );*/
+                  control.goToResetPasswordPage(context);
+                  // Puedes agregar cualquier acción que desees realizar aquí
+                },
+                child: Text(
+                  'Recuperar Contraseña',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )
+      ]),
+    );
   }
 
   Widget _imagePortrait(BuildContext conext) {
@@ -84,7 +174,7 @@ class SignUpPage extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/login-landscape.png'),
+            image: AssetImage('assets/images/sign-up-landscape.png'),
             fit: BoxFit.cover, // Ajustar la imagen al tamaño del Container
           ),
         ),
@@ -99,7 +189,7 @@ class SignUpPage extends StatelessWidget {
             flex: 1,
             child: _imagePortrait(context),
           ),
-          Expanded(flex: 1, child: _form(context)),
+          Expanded(flex: 2, child: _form(context)),
         ]),
       );
     } else {
@@ -109,7 +199,7 @@ class SignUpPage extends StatelessWidget {
             flex: 1,
             child: _imageLandscape(context),
           ),
-          Expanded(flex: 1, child: _form(context)),
+          Expanded(flex: 2, child: _form(context)),
         ]),
       );
     }
