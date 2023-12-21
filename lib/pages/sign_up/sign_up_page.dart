@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../sign_in_screen.dart';
@@ -7,6 +8,82 @@ import './sign_up_controller.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpController control = Get.put(SignUpController());
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+            height: 1200,
+            color: Colors.white,
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  'Términos y Condiciones',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Expanded(
+                  child: Markdown(
+                    data: control.markdownData.value,
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 45,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  control.aceptTerms();
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(double.infinity, 35),
+                                  backgroundColor: secondaryColor,
+                                ),
+                                child: Text(
+                                  'Acepto',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14),
+                                ),
+                              )),
+                          Expanded(flex: 10, child: SizedBox(height: 0)),
+                          Expanded(
+                              flex: 45,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  control.declineTerms();
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(double.infinity, 35),
+                                  backgroundColor: secondaryColor,
+                                ),
+                                child: Text(
+                                  'No Acepto',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14),
+                                ),
+                              ))
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ));
+      },
+    );
+  }
 
   Widget _form(BuildContext context) {
     return SingleChildScrollView(
@@ -74,10 +151,12 @@ class SignUpPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Checkbox(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
+                  Obx(() => Checkbox(
+                        value: control.termsCheck.value,
+                        onChanged: (value) {
+                          _showBottomSheet(context);
+                        },
+                      )),
                   Expanded(
                     child: Text(
                       'He leido y acepto los Términos y Condiciones',
@@ -207,6 +286,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    control.getTerms();
     return Scaffold(
         appBar: null,
         body: OrientationBuilder(builder: (context, orientation) {
