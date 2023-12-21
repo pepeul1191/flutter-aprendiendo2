@@ -388,7 +388,7 @@ class SignUpPage extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/login-portrait.png'),
+            image: AssetImage('assets/images/sign-up-portrait.png'),
             fit: BoxFit.cover, // Ajustar la imagen al tamaño del Container
           ),
         ),
@@ -399,7 +399,7 @@ class SignUpPage extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/login-portrait.png'),
+            image: AssetImage('assets/images/sign-up-landscape.png'),
             fit: BoxFit.cover, // Ajustar la imagen al tamaño del Container
           ),
         ),
