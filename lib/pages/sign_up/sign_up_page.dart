@@ -109,44 +109,48 @@ class SignUpPage extends StatelessWidget {
                   ),
                 ),
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Usuario',
-                  border: OutlineInputBorder(),
-                ),
-                controller: control.userController,
-                onChanged: (value) {},
-              ),
+              Obx(() => TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Usuario',
+                      border: OutlineInputBorder(),
+                    ),
+                    controller: control.userController,
+                    onChanged: (value) {},
+                    enabled: control.termsCheck.value,
+                  )),
               SizedBox(height: 10),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                controller: control.emailController,
-                decoration: InputDecoration(
-                  labelText: 'Correo',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (value) {},
-              ),
+              Obx(() => TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: control.emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Correo',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {},
+                    enabled: control.termsCheck.value,
+                  )),
               SizedBox(height: 10),
-              TextFormField(
-                obscureText: true,
-                controller: control.password1Controller,
-                decoration: InputDecoration(
-                  labelText: 'Contraseña',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (value) {},
-              ),
+              Obx(() => TextFormField(
+                    obscureText: true,
+                    controller: control.password1Controller,
+                    decoration: InputDecoration(
+                      labelText: 'Contraseña',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {},
+                    enabled: control.termsCheck.value,
+                  )),
               SizedBox(height: 10),
-              TextFormField(
-                obscureText: true,
-                controller: control.password2Controller,
-                decoration: InputDecoration(
-                  labelText: 'Repita su contraseña',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (value) {},
-              ),
+              Obx(() => TextFormField(
+                    obscureText: true,
+                    controller: control.password2Controller,
+                    decoration: InputDecoration(
+                      labelText: 'Repita su contraseña',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {},
+                    enabled: control.termsCheck.value,
+                  )),
               SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -166,17 +170,23 @@ class SignUpPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 5),
-              ElevatedButton(
-                onPressed: null,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  backgroundColor: secondaryColor,
-                ),
-                child: Text(
-                  'Crear Cuenta',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
+              Obx(() {
+                return ElevatedButton(
+                  onPressed: control.termsCheck.value
+                      ? () {
+                          control.signUp();
+                        }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 50),
+                    backgroundColor: secondaryColor,
+                  ),
+                  child: Text(
+                    'Crear Cuenta',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                );
+              }),
               _links(context)
             ],
           )),
