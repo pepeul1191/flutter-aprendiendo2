@@ -14,7 +14,7 @@ class SignUpPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Container(
-            height: 1200,
+            height: MediaQuery.of(context).size.height * 2,
             color: Colors.white,
             padding: EdgeInsets.all(20),
             child: Column(
@@ -85,7 +85,143 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  Widget _form(BuildContext context) {
+  Widget _formLandscape(BuildContext context) {
+    return SingleChildScrollView(
+        child: Container(
+            color: Colors.white,
+            child: Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      //Container(child:),
+                      Container(
+                        margin: EdgeInsets.only(
+                            bottom:
+                                20.0), // Margen inferior de 20.0 (puedes ajustar este valor)
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Llene el formulario',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 48,
+                              child: Obx(() => TextFormField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Usuario',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    controller: control.userController,
+                                    onChanged: (value) {},
+                                    enabled: control.termsCheck.value,
+                                  ))),
+                          Expanded(flex: 4, child: Container()),
+                          Expanded(
+                              flex: 48,
+                              child: Obx(() => TextFormField(
+                                    keyboardType: TextInputType.emailAddress,
+                                    controller: control.emailController,
+                                    decoration: InputDecoration(
+                                      labelText: 'Correo',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    onChanged: (value) {},
+                                    enabled: control.termsCheck.value,
+                                  ))),
+                        ],
+                      ),
+                      Container(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 48,
+                            child: Obx(() => TextFormField(
+                                  obscureText: true,
+                                  controller: control.password1Controller,
+                                  decoration: InputDecoration(
+                                    labelText: 'Contraseña',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  onChanged: (value) {},
+                                  enabled: control.termsCheck.value,
+                                )),
+                          ),
+                          Expanded(flex: 4, child: Container()),
+                          Expanded(
+                              flex: 48,
+                              child: Obx(() => TextFormField(
+                                    obscureText: true,
+                                    controller: control.password2Controller,
+                                    decoration: InputDecoration(
+                                      labelText: 'Repita su contraseña',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    onChanged: (value) {},
+                                    enabled: control.termsCheck.value,
+                                  ))),
+                        ],
+                      ),
+                      Container(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 48,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Obx(() => Checkbox(
+                                        value: control.termsCheck.value,
+                                        onChanged: (value) {
+                                          _showBottomSheet(context);
+                                        },
+                                      )),
+                                  Expanded(
+                                    child: Text(
+                                      'He leido y acepto los Términos y Condiciones',
+                                      style: TextStyle(fontSize: 16.0),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Expanded(flex: 4, child: Container()),
+                          Expanded(
+                            flex: 48,
+                            child: Obx(() {
+                              return ElevatedButton(
+                                onPressed: control.termsCheck.value
+                                    ? () {
+                                        control.signUp();
+                                      }
+                                    : null,
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(double.infinity, 50),
+                                  backgroundColor: secondaryColor,
+                                ),
+                                child: Text(
+                                  'Crear Cuenta',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }),
+                          ),
+                        ],
+                      ),
+                      _links(context)
+                    ]))));
+  }
+
+  Widget _formPortrait(BuildContext context) {
     return SingleChildScrollView(
         child: Container(
       color: Colors.white,
@@ -263,7 +399,7 @@ class SignUpPage extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/sign-up-landscape.png'),
+            image: AssetImage('assets/images/login-portrait.png'),
             fit: BoxFit.cover, // Ajustar la imagen al tamaño del Container
           ),
         ),
@@ -278,7 +414,7 @@ class SignUpPage extends StatelessWidget {
             flex: 1,
             child: _imagePortrait(context),
           ),
-          Expanded(flex: 2, child: _form(context)),
+          Expanded(flex: 2, child: _formPortrait(context)),
         ]),
       );
     } else {
@@ -288,7 +424,7 @@ class SignUpPage extends StatelessWidget {
             flex: 1,
             child: _imageLandscape(context),
           ),
-          Expanded(flex: 2, child: _form(context)),
+          Expanded(flex: 2, child: _formLandscape(context)),
         ]),
       );
     }
