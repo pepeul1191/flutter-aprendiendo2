@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../sign_in_screen.dart';
 import '../../configs/theme.dart';
 import './sign_up_controller.dart';
 

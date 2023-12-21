@@ -19,3 +19,6 @@ samples, guidance on mobile development, and a full API reference.
 $ flutter create --platforms=android dr_gym
 
 https://medium.com/flutterworld/flutter-mvvm-architecture-f8bed2521958
+
+https://fluttergems.de
+https://flutterawesome.com/tag/login-screen/
