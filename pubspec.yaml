@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.5
   flutter_markdown: ^0.6.18
   http: ^1.1.2
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:

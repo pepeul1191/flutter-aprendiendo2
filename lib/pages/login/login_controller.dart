@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../home/home_page.dart';
 import '../sign_up/sign_up_page.dart';
 import '../reset_password/reset_password_page.dart';
-import '../sign_in_screen.dart';
 
 class LoginController extends GetxController {
   TextEditingController userController = TextEditingController();
