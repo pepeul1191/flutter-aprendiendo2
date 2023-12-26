@@ -22,3 +22,10 @@ https://medium.com/flutterworld/flutter-mvvm-architecture-f8bed2521958
 
 https://fluttergems.de
 https://flutterawesome.com/tag/login-screen/
+https://pub.dev/packages/getwidget
+
+icono
+
+https://icon.kitchen/
+https://www.youtube.com/watch?v=eMHbgIgJyUQ
+$ flutter pub run flutter_launcher_icons

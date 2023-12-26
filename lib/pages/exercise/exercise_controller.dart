@@ -11,8 +11,9 @@ import '../../services/exercise_service.dart';
 class ExersiceController extends GetxController {
   RxList<BodyPart> bodyParts = <BodyPart>[].obs;
   RxList<Exercise> exercises = <Exercise>[].obs;
+  Rx<BodyPart> bodyPartSelected = BodyPart(id: 0, name: "").obs;
 
-  Future<void> listBodyParts(BuildContext) async {
+  Future<void> listBodyParts(BuildContext context) async {
     BodyPartService service = BodyPartService();
     try {
       print('try ++++++++++++++++++++++++++++++++++');
@@ -34,11 +35,11 @@ class ExersiceController extends GetxController {
     }
   }
 
-  Future<void> listExercises(BuildContext) async {
+  Future<void> listExercises(BuildContext context, {int bodyPartId = 0}) async {
     ExerciseService service = ExerciseService();
     try {
       print('try ++++++++++++++++++++++++++++++++++');
-      service.fetchAll().then((list) {
+      service.fetchAll(bodyPartId: bodyPartId).then((list) {
         exercises.clear();
         exercises.assignAll(list);
       });
