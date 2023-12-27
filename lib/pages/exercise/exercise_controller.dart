@@ -4,7 +4,7 @@ import 'package:dr_gym/models/entities/exercise.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/entities/body_part.dart';
-import '../../services/body_part_services.dart';
+import '../../services/body_part_service.dart';
 import '../../configs/http_api_exception.dart';
 import '../../services/exercise_service.dart';
 
