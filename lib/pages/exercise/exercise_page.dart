@@ -8,11 +8,12 @@ import 'exercise_controller.dart';
 
 class ExercisePage extends StatelessWidget {
   ExersiceController control = Get.put(ExersiceController());
-  String selectedOption = '';
-  List listItem = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
-  Widget _selectBodyPart(BuildContext context) {
-    return Obx(() => InputDecorator(
+  Widget _selectBodyPart(BuildContext context, double screenWidth) {
+    return Obx(() => SizedBox(
+        // O ConstrainedBox
+        width: screenWidth - 40 - 30,
+        child: InputDecorator(
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Partes del Cuerpo',
@@ -32,7 +33,10 @@ class ExercisePage extends StatelessWidget {
               items: [
                 DropdownMenuItem<BodyPart>(
                   value: null, // Establecer el valor del hint como null
-                  child: Text(control.bodyPartSelectedText.value),
+                  child: Text(
+                    control.bodyPartSelectedText.value,
+                    style: TextStyle(color: Colors.black54),
+                  ),
                 ),
                 ...control.bodyParts
                     .map<DropdownMenuItem<BodyPart>>((BodyPart item) {
@@ -44,7 +48,7 @@ class ExercisePage extends StatelessWidget {
               ],
             ),
           ),
-        ));
+        )));
   }
 
   Widget _exercisesGrid(BuildContext context) {
@@ -93,10 +97,25 @@ class ExercisePage extends StatelessWidget {
                 }))));
   }
 
+  Widget _resetButton(BuildContext context) {
+    return Container(
+        width: 40,
+        child: IconButton(
+          icon: Icon(Icons.refresh), // Icono a mostrar
+          onPressed: () {
+            print('XDDDDDDDDDDDDDd');
+            control.listExercises(context);
+            control.bodyPartSelectedText.value =
+                "Seleccione un parte del cuerpo";
+          }, // Función a ejecutar al hacer clic
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     control.listBodyParts(context);
     control.listExercises(context);
+    double screenWidth = MediaQuery.of(context).size.width;
     //Get.snackbar('Respuesta HTTP con errores', 'XD');
     return Padding(
         padding:
@@ -104,7 +123,12 @@ class ExercisePage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(height: 5),
-            _selectBodyPart(context),
+            Row(
+              children: [
+                _selectBodyPart(context, screenWidth),
+                _resetButton(context)
+              ],
+            ),
             SizedBox(height: 20),
             _exercisesGrid(context),
             SizedBox(height: 10)
