@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../configs/theme.dart';
 import './sign_up_controller.dart';
@@ -248,6 +249,9 @@ class SignUpPage extends StatelessWidget {
                       labelText: 'Usuario',
                       border: OutlineInputBorder(),
                     ),
+                    onTap: () {
+                      print('XDDDDDDDDDDd');
+                    },
                     controller: control.userController,
                     onChanged: (value) {},
                     enabled: control.termsCheck.value,
@@ -404,6 +408,17 @@ class SignUpPage extends StatelessWidget {
         child: null);
   }
 
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT, // Duración del Toast (SHORT o LONG)
+      gravity: ToastGravity.BOTTOM, // Posición del Toast
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
   Widget _buildBody(Orientation orientation, BuildContext context) {
     if (orientation == Orientation.portrait) {
       return SafeArea(
@@ -412,7 +427,17 @@ class SignUpPage extends StatelessWidget {
             flex: 1,
             child: _imagePortrait(context),
           ),
-          Expanded(flex: 2, child: _formPortrait(context)),
+          Expanded(
+              flex: 2,
+              child: GestureDetector(
+                  onTap: () {
+                    // Acción que se ejecutará al hacer clic en el TextFormField
+                    if (!control.termsCheck.value) {
+                      _showToast(
+                          'Debe de aceptar primero los Términos y Condiciones');
+                    }
+                  },
+                  child: _formPortrait(context))),
         ]),
       );
     } else {
@@ -422,7 +447,17 @@ class SignUpPage extends StatelessWidget {
             flex: 1,
             child: _imageLandscape(context),
           ),
-          Expanded(flex: 2, child: _formLandscape(context)),
+          Expanded(
+              flex: 2,
+              child: GestureDetector(
+                  onTap: () {
+                    // Acción que se ejecutará al hacer clic en el TextFormField
+                    if (!control.termsCheck.value) {
+                      _showToast(
+                          'Debe de aceptar primero los Términos y Condiciones');
+                    }
+                  },
+                  child: _formLandscape(context))),
         ]),
       );
     }
