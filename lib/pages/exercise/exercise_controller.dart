@@ -12,6 +12,7 @@ class ExersiceController extends GetxController {
   RxList<BodyPart> bodyParts = <BodyPart>[].obs;
   RxList<Exercise> exercises = <Exercise>[].obs;
   Rx<BodyPart> bodyPartSelected = BodyPart(id: 0, name: "").obs;
+  RxString bodyPartSelectedText = "Seleccione un parte del cuerpo".obs;
 
   Future<void> listBodyParts(BuildContext context) async {
     BodyPartService service = BodyPartService();

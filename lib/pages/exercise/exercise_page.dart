@@ -9,12 +9,12 @@ import 'exercise_controller.dart';
 class ExercisePage extends StatelessWidget {
   ExersiceController control = Get.put(ExersiceController());
   String selectedOption = '';
+  List listItem = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
   Widget _selectBodyPart(BuildContext context) {
     return Obx(() => InputDecorator(
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            // Utilizar solo 'label' en lugar de 'labelText'
             labelText: 'Partes del Cuerpo',
             hintText: 'Select an option',
             contentPadding:
@@ -24,17 +24,24 @@ class ExercisePage extends StatelessWidget {
             child: DropdownButton<BodyPart>(
               isDense: true,
               isExpanded: true,
-              value: null,
+              value: null, // Establecer el valor inicial como null
               onChanged: (BodyPart? newValue) {
                 control.listExercises(context, bodyPartId: newValue!.id);
+                control.bodyPartSelectedText.value = newValue!.name;
               },
-              items: control.bodyParts
-                  .map<DropdownMenuItem<BodyPart>>((BodyPart item) {
-                return DropdownMenuItem<BodyPart>(
-                  value: item,
-                  child: Text(item.name),
-                );
-              }).toList(),
+              items: [
+                DropdownMenuItem<BodyPart>(
+                  value: null, // Establecer el valor del hint como null
+                  child: Text(control.bodyPartSelectedText.value),
+                ),
+                ...control.bodyParts
+                    .map<DropdownMenuItem<BodyPart>>((BodyPart item) {
+                  return DropdownMenuItem<BodyPart>(
+                    value: item,
+                    child: Text(item.name),
+                  );
+                }).toList(),
+              ],
             ),
           ),
         ));
