@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
+import 'package:get_storage/get_storage.dart';
+import '../reset_password/reset_password_page.dart';
+import '../sign_up/sign_up_page.dart';
 import '../../models/http/response_api.dart';
 import '../../services/user_service.dart';
 import '../home/home_page.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import '../sign_up/sign_up_page.dart';
-import '../reset_password/reset_password_page.dart';
 
 class LoginController extends GetxController {
   TextEditingController userController = TextEditingController();
@@ -17,6 +19,9 @@ class LoginController extends GetxController {
     UserService service = UserService();
     ResponseApi responseApi = await service.login(user, password);
     if (responseApi.success ?? false) {
+      Map<String, dynamic> userJson = jsonDecode(responseApi.data);
+      GetStorage().write('user_id', userJson['user_id']);
+      GetStorage().write('member_id', userJson['member_id']);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
