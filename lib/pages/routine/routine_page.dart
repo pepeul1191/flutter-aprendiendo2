@@ -33,7 +33,7 @@ class RoutinePage extends StatelessWidget {
               isExpanded: true,
               value: null, // Establecer el valor inicial como null
               onChanged: (BodyPart? newValue) {
-                control.listExercises(context, bodyPartId: newValue!.id);
+                control.listExercises(context, bodyPartId: newValue!.id, memberId: memberId);
                 control.bodyPartSelectedText.value = newValue!.name;
               },
               items: [
@@ -110,7 +110,7 @@ class RoutinePage extends StatelessWidget {
           icon: Icon(Icons.refresh), // Icono a mostrar
           onPressed: () {
             print('XDDDDDDDDDDDDDd');
-            control.listExercises(context);
+            control.listExercises(context, memberId: memberId);
             control.bodyPartSelectedText.value =
                 "Seleccione un parte del cuerpo";
           }, // Función a ejecutar al hacer clic
