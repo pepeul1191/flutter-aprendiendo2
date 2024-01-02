@@ -6,11 +6,29 @@ import '../configs/constants.dart';
 import 'package:http/http.dart' as http;
 import '../configs/http_api_exception.dart';
 import '../models/entities/body_part.dart';
+import '../models/http/exercise_body_part_amount.dart';
 
 class MemberService {
-  Future<List<Exercise>> fetchExercies(
+  Future<ExerciseBodyPartAmount> fetchAmoutExercicesAndBodyParts(
+      {int memberId = 0}) async {
+    String url = "${BASE_URL}member/exercises_body_parts?member_id=$memberId";
+    ExerciseBodyPartAmount amounts;
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      print('MemberService if ++++++++++++++++++++++++++++++++++');
+      print(response.body);
+      amounts = ExerciseBodyPartAmount.fromJson(json.decode(response.body));
+      print(amounts.toString());
+      return amounts;
+    } else {
+      print('else ++++++++++++++++++++++++++++++++++');
+      throw HttpApiException(response.statusCode, response.body);
+    }
+  }
+
+   Future<List<Exercise>> fetchExercises(
       {int bodyPartId = 0, int memberId = 0}) async {
-    String url = "${BASE_URL}member/exercises_body_parts" +
+    String url = "${BASE_URL}member/exercises" +
         ((bodyPartId == 0) ? '' : '?body_part_id=$bodyPartId') +
         ((memberId == 0)
             ? ''

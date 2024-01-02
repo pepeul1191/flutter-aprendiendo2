@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../sign_in_screen.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../configs/theme.dart';
 import './login_controller.dart';
 
@@ -205,7 +205,8 @@ class LoginPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    control.checkUserLogged(context);
     return Scaffold(
         appBar: null,
         body: OrientationBuilder(builder: (context, orientation) {

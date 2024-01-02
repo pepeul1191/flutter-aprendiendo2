@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dr_gym/configs/theme.dart';
 import 'package:dr_gym/pages/exercise/exercise_page.dart';
 import 'package:dr_gym/pages/user/user_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import '../../models/datastore/local_user.dart';
 import '../routine/routine_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -86,14 +89,17 @@ class _HomePageState extends State<HomePage> {
             // Agregar un menú desplegable al AppBar
             _popUpMenu()
           ]),
-      body: WillPopScope(
+      /*body: WillPopScope(
           onWillPop: () async {
             exit(0);
-            return false; // Cambiar a `false` si quieres bloquear el retroceso
+            return false; 
           },
           child: Center(
             child: _widgetOptions.elementAt(_selectedIndex),
-          )),
+          )),*/
+          body: Center(
+            child: _widgetOptions.elementAt(_selectedIndex),
+          ),
       bottomNavigationBar: _navigationBottom(),
     );
   }

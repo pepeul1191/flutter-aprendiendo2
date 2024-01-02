@@ -29,3 +29,7 @@ icono
 https://icon.kitchen/
 https://www.youtube.com/watch?v=eMHbgIgJyUQ
 $ flutter pub run flutter_launcher_icons
+
+json to dart
+
+https://quicktype.io/

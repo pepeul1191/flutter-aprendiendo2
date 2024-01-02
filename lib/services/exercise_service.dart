@@ -13,7 +13,6 @@ class ExerciseService {
         ((bodyPartId == 0) ? '' : '?body_part_id=$bodyPartId');
     List<Exercise> bodyParts = [];
     final response = await http.get(Uri.parse(url));
-    print('response ++++++++++++++++++++++++++++++++++');
     if (response.statusCode == 200) {
       print('if ++++++++++++++++++++++++++++++++++');
       final List<dynamic> parsedData = json.decode(response.body);

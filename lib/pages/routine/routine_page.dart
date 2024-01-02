@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'dart:ffi';
 
+import 'package:get_storage/get_storage.dart';
+
+import '../../models/datastore/local_user.dart';
 import '../../models/entities/body_part.dart';
 import '../../configs/constants.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +12,8 @@ import 'routine_controller.dart';
 
 class RoutinePage extends StatelessWidget {
   RoutineController control = Get.put(RoutineController());
-  int memberId = 1;
+  int memberId = 0;
+  int userId = 0;
 
   Widget _selectBodyPart(BuildContext context, double screenWidth) {
     return Obx(() => SizedBox(
@@ -127,10 +132,11 @@ class RoutinePage extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
+              Obx(() =>
               Text(
-                "5",
+                control.bodyPartsAmount.value.toString(),
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              )
+              ))
             ],
           ),
         ),
@@ -143,10 +149,10 @@ class RoutinePage extends StatelessWidget {
                 'Total de\n Ejercicios',
                 style: TextStyle(fontSize: 16),
               ),
-              Text(
-                "5",
+              Obx(() =>Text(
+                control.exercisesAmount.value.toString(),
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              )
+              ))
             ],
           ),
         ),
@@ -156,7 +162,14 @@ class RoutinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // load user stored
+    final userString = GetStorage().read('user');
+    final storedLocalUser = LocalUser.fromJson(jsonDecode(userString));
+    memberId = storedLocalUser.memberId!;
+    userId = storedLocalUser.userId!;
+    // list per user
     control.listBodyParts(context, memberId);
+    control.getAmoutExercicesAndBodyParts(context, memberId: memberId);
     control.listExercises(context, memberId: memberId);
     double screenWidth = MediaQuery.of(context).size.width;
     //Get.snackbar('Respuesta HTTP con errores', 'XD');
@@ -168,6 +181,12 @@ class RoutinePage extends StatelessWidget {
             Row(children: [
               _routineResume(context),
             ]),
+            Divider( // Aquí se utiliza el widget Divider
+                color: Colors.grey, // Puedes personalizar el color
+                thickness: 2, // Grosor de la línea
+                indent: 20, // Espaciado a la izquierda
+                endIndent: 20, // Espaciado a la derecha
+              ),
             SizedBox(height: 15),
             Row(
               children: [
