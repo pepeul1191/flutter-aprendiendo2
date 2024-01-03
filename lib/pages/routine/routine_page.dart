@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
 
-import 'package:dr_gym/models/entities/exercise.dart';
+import 'package:dr_gym/models/entities/exercise_member.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../models/datastore/local_user.dart';
@@ -58,7 +58,7 @@ class RoutinePage extends StatelessWidget {
         )));
   }
 
-  Widget _exerciseDetail(Exercise exercise){
+  Widget _exerciseDetail(ExerciseMember exercise){
     return Text(exercise.toString());
   }
 

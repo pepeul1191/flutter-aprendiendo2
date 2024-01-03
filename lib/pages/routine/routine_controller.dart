@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dr_gym/models/entities/exercise.dart';
+import 'package:dr_gym/models/entities/exercise_member.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/entities/body_part.dart';
@@ -9,7 +9,7 @@ import '../../configs/http_api_exception.dart';
 
 class RoutineController extends GetxController {
   RxList<BodyPart> bodyParts = <BodyPart>[].obs;
-  RxList<Exercise> exercises = <Exercise>[].obs;
+  RxList<ExerciseMember> exercises = <ExerciseMember>[].obs;
   Rx<BodyPart> bodyPartSelected = BodyPart(id: 0, name: "").obs;
   RxString bodyPartSelectedText = "Seleccione un parte del cuerpo".obs;
   RxInt exercisesAmount = 0.obs;

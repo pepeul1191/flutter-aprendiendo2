@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dr_gym/models/entities/exercise.dart';
+import 'package:dr_gym/models/entities/exercise_member.dart';
 
 import '../configs/constants.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +26,7 @@ class MemberService {
     }
   }
 
-   Future<List<Exercise>> fetchExercises(
+   Future<List<ExerciseMember>> fetchExercises(
       {int bodyPartId = 0, int memberId = 0}) async {
     String url = "${BASE_URL}member/exercises" +
         ((bodyPartId == 0) ? '' : '?body_part_id=$bodyPartId') +
@@ -35,7 +35,7 @@ class MemberService {
             : (bodyPartId == 0)
                 ? '?member_id=$memberId'
                 : '&member_id=$memberId');
-    List<Exercise> bodyParts = [];
+    List<ExerciseMember> bodyParts = [];
     final response = await http.get(Uri.parse(url));
     print('response ++++++++++++++++++++++++++++++++++');
     if (response.statusCode == 200) {
@@ -43,7 +43,7 @@ class MemberService {
       print(response.body);
       final List<dynamic> parsedData = json.decode(response.body);
       bodyParts = parsedData
-          .map((bodyPartJson) => Exercise.fromJson(bodyPartJson))
+          .map((bodyPartJson) => ExerciseMember.fromJson(bodyPartJson))
           .toList();
       return bodyParts;
     } else {
