@@ -7,6 +7,7 @@ import 'package:dr_gym/pages/user/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/datastore/local_user.dart';
+import '../profile/profile_page.dart';
 import '../routine/routine_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _popUpMenu() {
+  Widget _popUpMenu(BuildContext context) {
     return PopupMenuButton<String>(
       onSelected: (String value) {
         // Manejar la opción seleccionada
@@ -61,11 +62,21 @@ class _HomePageState extends State<HomePage> {
           case 'signOut':
             print('Cerrar Sesión');
             break;
+          case 'profile':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+            break;
           default:
             print('Unknown fruit');
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        PopupMenuItem<String>(
+          value: 'profile',
+          child: Text('Mi perfil'),
+        ),
         PopupMenuItem<String>(
           value: 'about',
           child: Text('Acerca de'),
@@ -87,7 +98,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: secondaryColor,
           actions: [
             // Agregar un menú desplegable al AppBar
-            _popUpMenu()
+            _popUpMenu(context)
           ]),
       /*body: WillPopScope(
           onWillPop: () async {

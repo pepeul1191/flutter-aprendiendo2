@@ -42,6 +42,7 @@ dependencies:
   fluttertoast: ^8.2.4
   get_storage: ^2.1.1
   webview_flutter: ^2.0.13
+  image_picker: ^0.8.4+4
 
 dev_dependencies:
   flutter_test:
