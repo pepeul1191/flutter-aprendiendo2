@@ -23,4 +23,22 @@ class UserService {
       return ResponseApi.fromJson(json.decode(response.body));
     }
   }
+
+  Future<void> uploadProfileImage(String filePath) async {
+    var request = http.MultipartRequest('POST', Uri.parse('${BASE_URL}file/upload'));
+    request.files.add(await http.MultipartFile.fromPath('file', filePath)); // 'file' es el nombre del campo 
+    try {
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        // Manejar la respuesta del servidor si es exitosa
+        print('Archivo enviado exitosamente');
+      } else {
+        // Manejar errores
+        print('Error al enviar el archivo: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Manejar excepciones
+      print('Excepción al enviar el archivo: $e');
+    }
+  }
 }

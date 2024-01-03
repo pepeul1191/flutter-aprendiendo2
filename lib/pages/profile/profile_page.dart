@@ -25,7 +25,6 @@ class ProfilePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 control.saveChanges(context);
-                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 35),

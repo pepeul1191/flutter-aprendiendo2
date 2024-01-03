@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../services/user_service.dart';
+
 class ProfileController extends GetxController {
   RxString imagePath = ''.obs;
   Rx<File?> pickedImageFile = File('').obs;
@@ -32,7 +34,9 @@ class ProfileController extends GetxController {
     Navigator.pop(context); 
   }
 
-  void saveChanges(BuildContext context){
+  void saveChanges(BuildContext context) async{
     print('saveChanges');
+    UserService service = UserService();
+    await service.uploadProfileImage(pickedImageFile.value!.path);
   }
 }
