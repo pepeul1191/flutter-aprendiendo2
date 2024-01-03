@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
 
+import 'package:dr_gym/models/entities/exercise.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../models/datastore/local_user.dart';
@@ -57,6 +58,10 @@ class RoutinePage extends StatelessWidget {
         )));
   }
 
+  Widget _exerciseDetail(Exercise exercise){
+    return Text(exercise.toString());
+  }
+
   Widget _exercisesGrid(BuildContext context) {
     return Expanded(
         child: Container(
@@ -76,6 +81,29 @@ class RoutinePage extends StatelessWidget {
                         // Handle the tap event.
                         print(
                             'Grid tile ${control.exercises.value[index].id} tapped');
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return Container(
+                              color: Colors.transparent, // Opcional: establece un color de fondo si lo deseas
+                              child: FractionallySizedBox(
+                                heightFactor: 0.65,
+                                widthFactor: 1, // Puedes ajustar la altura como desees
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: _exerciseDetail(control.exercises.value[index]), // Reemplaza 'TuContenidoAquí' con tu contenido deseado
+                                ),
+                              ),
+                            );
+                          },
+                        );
                         //Navigator.pushNamed(context, '/pokemon/detail',
                         //arguments: {'id': control.exercises.value[index].id});
                       },
