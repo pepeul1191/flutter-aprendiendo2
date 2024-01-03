@@ -41,6 +41,7 @@ dependencies:
   http: ^1.1.2
   fluttertoast: ^8.2.4
   get_storage: ^2.1.1
+  webview_flutter: ^2.0.13
 
 dev_dependencies:
   flutter_test:

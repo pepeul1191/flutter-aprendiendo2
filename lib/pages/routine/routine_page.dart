@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:dr_gym/models/entities/exercise_member.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:webview_flutter/webview_flutter.dart';
 import '../../models/datastore/local_user.dart';
 import '../../models/entities/body_part.dart';
 import '../../configs/constants.dart';
@@ -58,8 +56,19 @@ class RoutinePage extends StatelessWidget {
         )));
   }
 
-  Widget _exerciseDetail(ExerciseMember exercise){
-    return Text(exercise.toString());
+  Widget _exerciseDetail(BuildContext context, ExerciseMember exercise){
+    print('https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}');
+    return Column(
+      children: [
+        Text(exercise.toString()), 
+        Container(
+          height: MediaQuery.of(context).size.height * 0.8 * 0.4,
+          child: WebView(
+            initialUrl: 'https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}',
+            javascriptMode: JavascriptMode.unrestricted,
+          ),
+        )
+      ]);
   }
 
   Widget _exercisesGrid(BuildContext context) {
@@ -98,7 +107,7 @@ class RoutinePage extends StatelessWidget {
                                       topRight: const Radius.circular(20.0),
                                     ),
                                   ),
-                                  child: _exerciseDetail(control.exercises.value[index]), // Reemplaza 'TuContenidoAquí' con tu contenido deseado
+                                  child: _exerciseDetail(context, control.exercises.value[index]), // Reemplaza 'TuContenidoAquí' con tu contenido deseado
                                 ),
                               ),
                             );
