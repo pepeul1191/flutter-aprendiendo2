@@ -59,12 +59,29 @@ class ProfilePage extends StatelessWidget {
               child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Contenido del BottomSheet',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Contenido del BottomSheet',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              control.closeBottomSheet(context);
+                            },
+                            child: Text(
+                              'Cerrar', 
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      )
+                    ]
                   ),
                   SizedBox(height: 20),
                   Row(
@@ -135,7 +152,7 @@ class ProfilePage extends StatelessWidget {
               child: Icon(
                 Icons.edit,
                 color: Colors.black,
-                size: 20,
+                size: 30,
               )
             ),
           ),

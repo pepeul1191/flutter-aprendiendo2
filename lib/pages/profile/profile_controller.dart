@@ -14,6 +14,7 @@ class ProfileController extends GetxController {
       // Acción con la imagen capturada (p.ej. mostrarla en un widget)
       print('Control: Imagen seleccionada desde la cámara: ${pickedImage.path}');
       pickedImageFile.value = File(pickedImage.path);
+      closeBottomSheet(context);
     }
   }
 
@@ -23,7 +24,12 @@ class ProfileController extends GetxController {
       // Acción con la imagen seleccionada (p.ej. mostrarla en un widget)
       print('Control: Imagen seleccionada desde la galería: ${pickedImage.path}');
       pickedImageFile.value = File(pickedImage.path);
+      closeBottomSheet(context);
     }
+  }
+
+  void closeBottomSheet(BuildContext context){
+    Navigator.pop(context); 
   }
 
   void saveChanges(BuildContext context){
