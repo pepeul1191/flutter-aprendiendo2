@@ -33,7 +33,36 @@ class LocationPage extends StatelessWidget {
                 TileLayer(
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.example.dr_gym',
-              ),
+                ),
+                MarkerLayer(
+                  markers: [
+                    control.focused.value != false ?
+                    Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(control.latitude.value, control.longitude.value),
+                      child: Container(
+                        child: Icon(
+                          Icons.location_on,
+                          size: 40.0,
+                          color: Colors.red,
+                        ),
+                      ),
+                    )  : Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(0, 0),
+                      child: Container(
+                        child: Icon(
+                          Icons.location_on,
+                          size: 0.0,
+                          color: Colors.red,
+                        ),
+                      ),
+                    )  
+                  ],
+                  key: mapKey
+                )
               ], 
               mapController: mapController,
             ),
