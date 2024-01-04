@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../models/datastore/local_user.dart';
 import '../profile/profile_page.dart';
 import '../routine/routine_page.dart';
+import '../map/map_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -68,6 +69,12 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(builder: (context) => ProfilePage()),
             );
             break;
+          case 'maps':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MapPage()),
+            );
+            break;
           default:
             print('Unknown fruit');
         }
@@ -80,6 +87,10 @@ class _HomePageState extends State<HomePage> {
         PopupMenuItem<String>(
           value: 'about',
           child: Text('Acerca de'),
+        ),
+        PopupMenuItem<String>(
+          value: 'maps',
+          child: Text('Ver mapa'),
         ),
         PopupMenuItem<String>(
           value: 'signOut',
