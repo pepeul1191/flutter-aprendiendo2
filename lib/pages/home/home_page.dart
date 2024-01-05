@@ -9,7 +9,8 @@ import 'package:get_storage/get_storage.dart';
 import '../../models/datastore/local_user.dart';
 import '../profile/profile_page.dart';
 import '../routine/routine_page.dart';
-import '../map/location_page.dart';
+import '../location/location_page.dart';
+import '../scanner/scanner_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -75,6 +76,12 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(builder: (context) => LocationPage()),
             );
             break;
+          case 'scanner':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ScannerPage()),
+            );
+            break;
           default:
             print('Unknown fruit');
         }
@@ -91,6 +98,10 @@ class _HomePageState extends State<HomePage> {
         PopupMenuItem<String>(
           value: 'maps',
           child: Text('Ver mapa'),
+        ),
+        PopupMenuItem<String>(
+          value: 'scanner',
+          child: Text('Leer Código QR'),
         ),
         PopupMenuItem<String>(
           value: 'signOut',
