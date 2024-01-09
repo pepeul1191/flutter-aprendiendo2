@@ -33,3 +33,9 @@ $ flutter pub run flutter_launcher_icons
 json to dart
 
 https://quicktype.io/
+
+qr
+
+https://samiaashraf.medium.com/simplify-barcode-and-qr-code-scan-in-flutter-apps-be8f936f1b64
+https://qr.io/?gad_source=1&gclid=EAIaIQobChMIuPuh9a7QgwMVT1lIAB2boAbBEAAYASAAEgK96PD_BwE
+https://barcode.tec-it.com/es
