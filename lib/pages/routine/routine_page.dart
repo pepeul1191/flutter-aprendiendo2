@@ -58,17 +58,83 @@ class RoutinePage extends StatelessWidget {
 
   Widget _exerciseDetail(BuildContext context, ExerciseMember exercise){
     print('https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}');
-    return Column(
-      children: [
-        Text(exercise.toString()), 
-        Container(
-          height: MediaQuery.of(context).size.height * 0.8 * 0.4,
-          child: WebView(
-            initialUrl: 'https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}',
-            javascriptMode: JavascriptMode.unrestricted,
-          ),
-        )
-      ]);
+    return Padding(
+            padding: EdgeInsets.all(16.0), // Ajusta aquí el tamaño del padding
+            child: 
+            Expanded(
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 20),
+                Center(
+                  child: Text(
+                    exercise.name,
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600
+                    ),
+                  )
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Expanded(
+                          flex: 25,
+                          child: 
+                            Text(
+                              exercise.reps.toString(),
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600
+                              ),
+                            )
+                        ),
+                        Expanded(
+                          flex: 25,
+                          child: Container(), 
+                        ),
+                        Expanded(
+                          flex: 25,
+                          child: Text('Repeticiones')
+                        ),
+                        Expanded(
+                          flex: 25,
+                          child: Container(), 
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          exercise.sets.toString(),
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                        Text('Series')
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Text(
+                  exercise.description
+                ),
+                SizedBox(height: 20),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.8 * 0.4,
+                  child: WebView(
+                    initialUrl: 'https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}',
+                    javascriptMode: JavascriptMode.unrestricted,
+                  ),
+                )
+              ]
+            )
+          )
+        );
   }
 
   Widget _exercisesGrid(BuildContext context) {

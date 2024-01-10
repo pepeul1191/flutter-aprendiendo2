@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dr_gym/configs/theme.dart';
 import 'package:dr_gym/pages/exercise/exercise_page.dart';
 import 'package:dr_gym/pages/user/user_page.dart';
+import 'package:dr_gym/pages/finger_print/finger_print_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../models/datastore/local_user.dart';
@@ -82,6 +83,12 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(builder: (context) => ScannerPage()),
             );
             break;
+          case 'fingerprint':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FingerPrintPage()),
+            );
+            break;
           default:
             print('Unknown fruit');
         }
@@ -102,6 +109,10 @@ class _HomePageState extends State<HomePage> {
         PopupMenuItem<String>(
           value: 'scanner',
           child: Text('Leer Código QR'),
+        ),
+        PopupMenuItem<String>(
+          value: 'fingerprint',
+          child: Text('Leer Huella'),
         ),
         PopupMenuItem<String>(
           value: 'signOut',
