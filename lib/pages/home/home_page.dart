@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   static List<Widget> _widgetOptions = <Widget>[
     RoutinePage(),
     ExercisePage(),
-    UserPage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -141,9 +141,9 @@ class _HomePageState extends State<HomePage> {
           child: Center(
             child: _widgetOptions.elementAt(_selectedIndex),
           )),*/
-          body: Center(
-            child: _widgetOptions.elementAt(_selectedIndex),
-          ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: _navigationBottom(),
     );
   }
