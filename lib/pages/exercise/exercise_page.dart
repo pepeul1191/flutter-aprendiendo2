@@ -4,6 +4,8 @@ import '../../models/entities/body_part.dart';
 import '../../configs/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../models/entities/exercise.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'exercise_controller.dart';
 
 class ExercisePage extends StatelessWidget {
@@ -51,6 +53,33 @@ class ExercisePage extends StatelessWidget {
         )));
   }
 
+  Widget _exerciseDetail(BuildContext context, Exercise exercise) {
+    print('https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}');
+    return Padding(
+        padding: EdgeInsets.all(16.0), // Ajusta aquí el tamaño del padding
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          SizedBox(height: 5),
+          Center(
+              child: Text(
+            exercise.name,
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+          )),
+          SizedBox(height: 20),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(exercise.description)),
+          SizedBox(height: 20),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.8 * 0.4,
+            child: WebView(
+              initialUrl:
+                  'https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}',
+              javascriptMode: JavascriptMode.unrestricted,
+            ),
+          )
+        ]));
+  }
+
   Widget _exercisesGrid(BuildContext context) {
     return Expanded(
         child: Container(
@@ -70,8 +99,35 @@ class ExercisePage extends StatelessWidget {
                         // Handle the tap event.
                         print(
                             'Grid tile ${control.exercises.value[index].id} tapped');
-                        //Navigator.pushNamed(context, '/pokemon/detail',
-                        //arguments: {'id': control.exercises.value[index].id});
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return Container(
+                              color: Colors
+                                  .transparent, // Opcional: establece un color de fondo si lo deseas
+                              child: FractionallySizedBox(
+                                heightFactor: 0.65,
+                                widthFactor:
+                                    1, // Puedes ajustar la altura como desees
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                      child: _exerciseDetail(
+                                          context,
+                                          control.exercises.value[
+                                              index])), // Reemplaza 'TuContenidoAquí' con tu contenido deseado
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
                       child: GridTile(
                         child: Container(
