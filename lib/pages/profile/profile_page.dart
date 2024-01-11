@@ -172,12 +172,12 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  void _showBottomSheetPicture(BuildContext context) {
+  void _bottomSheetPicture(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return Container(
-              height: 150,
+              height: 180,
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               padding: EdgeInsets.all(20),
@@ -190,47 +190,89 @@ class ProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                     Row(children: [
-                      Row(
+                      Expanded(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Contenido del BottomSheet',
+                            'Foto del perfil',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              control.closeBottomSheet(context);
-                            },
-                            child: Text(
-                              'Cerrar',
-                              style: TextStyle(color: Colors.white),
+                          Material(
+                            color: Colors.transparent,
+                            child: IconButton(
+                              icon: Icon(Icons.close, color: Colors.grey),
+                              onPressed: () {
+                                control.closeBottomSheet(context);
+                              },
                             ),
                           ),
                         ],
-                      )
+                      ))
                     ]),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Row(
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            control.pickImageFromGallery(context);
-                          },
-                          child: Text(
-                            'Galeria',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                control.takePicture(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                shape: CircleBorder(),
+                              ),
+                              child: Ink(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                                child: IconButton(
+                                  icon: Icon(Icons.camera_alt_outlined,
+                                      color: Colors.grey),
+                                  onPressed: () {
+                                    control.takePicture(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Text('Cámara')
+                          ],
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            control.takePicture(context);
-                          },
-                          child: Text(
-                            'Cámara',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        Container(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                control.pickImageFromGallery(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                shape: CircleBorder(),
+                              ),
+                              child: Ink(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                                child: IconButton(
+                                  icon: Icon(Icons.image, color: Colors.grey),
+                                  onPressed: () {
+                                    control.pickImageFromGallery(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Text('Galería')
+                          ],
                         ),
                       ],
                     )
@@ -267,7 +309,7 @@ class ProfilePage extends StatelessWidget {
             child: InkWell(
                 onTap: () {
                   // Acción que deseas realizar al hacer clic en el icono
-                  _showBottomSheetPicture(context);
+                  _bottomSheetPicture(context);
                 },
                 child: Icon(
                   Icons.camera_alt,
@@ -327,71 +369,5 @@ class ProfilePage extends StatelessWidget {
             ],
           )),
     );
-    /*
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          children: [
-            _buildCircularImageWithIcon(context),
-            Column(
-              children: [
-                Text('Carlos Tevez'),
-                Row(
-                  children: [
-                    Icon(Icons.person, color: Colors.black54),
-                    SizedBox(width: 8.0), // Espaciado entre el icono y el texto
-                    Text(
-                      '20051191',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                  ],
-                ),
-                Text('20051191'),
-              ],
-            )
-          ],
-        ),
-        Column(
-          children: [
-            Row(
-              children: [
-                Icon(Icons.phone, color: Colors.black54),
-                SizedBox(width: 8.0), // Espaciado entre el icono y el texto
-                Text(
-                  '91823901283',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(Icons.mail, color: Colors.black54),
-                SizedBox(width: 8.0), // Espaciado entre el icono y el texto
-                Text(
-                  '20051191@ulima.edu.pe',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ],
-            ),
-          ],
-        ),
-        ElevatedButton(
-          onPressed: () {
-            control.saveChanges(context);
-          },
-          style: ElevatedButton.styleFrom(
-            minimumSize: Size(double.infinity, 35),
-            backgroundColor: secondaryColor,
-          ),
-          child: Text(
-            'Guardar Cambios',
-            style: TextStyle(color: Colors.black, fontSize: 14),
-          ),
-        )
-      ],
-    ));
-    */
   }
 }
