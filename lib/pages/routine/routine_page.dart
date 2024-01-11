@@ -32,7 +32,8 @@ class RoutinePage extends StatelessWidget {
               isExpanded: true,
               value: null, // Establecer el valor inicial como null
               onChanged: (BodyPart? newValue) {
-                control.listExercises(context, bodyPartId: newValue!.id, memberId: memberId);
+                control.listExercises(context,
+                    bodyPartId: newValue!.id, memberId: memberId);
                 control.bodyPartSelectedText.value = newValue!.name;
               },
               items: [
@@ -56,85 +57,59 @@ class RoutinePage extends StatelessWidget {
         )));
   }
 
-  Widget _exerciseDetail(BuildContext context, ExerciseMember exercise){
+  Widget _exerciseDetail(BuildContext context, ExerciseMember exercise) {
     print('https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}');
     return Padding(
-            padding: EdgeInsets.all(16.0), // Ajusta aquí el tamaño del padding
-            child: 
-            Expanded(
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 20),
-                Center(
-                  child: Text(
-                    exercise.name,
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w600
-                    ),
-                  )
-                ),
-                SizedBox(height: 20),
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        Expanded(
-                          flex: 25,
-                          child: 
-                            Text(
-                              exercise.reps.toString(),
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w600
-                              ),
-                            )
-                        ),
-                        Expanded(
-                          flex: 25,
-                          child: Container(), 
-                        ),
-                        Expanded(
-                          flex: 25,
-                          child: Text('Repeticiones')
-                        ),
-                        Expanded(
-                          flex: 25,
-                          child: Container(), 
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          exercise.sets.toString(),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600
-                          ),
-                        ),
-                        Text('Series')
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Text(
-                  exercise.description
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.8 * 0.4,
-                  child: WebView(
-                    initialUrl: 'https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}',
-                    javascriptMode: JavascriptMode.unrestricted,
+        padding: EdgeInsets.all(16.0), // Ajusta aquí el tamaño del padding
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          SizedBox(height: 5),
+          Center(
+              child: Text(
+            exercise.name,
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+          )),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child: Column(
+                children: [
+                  Text(
+                    exercise.reps.toString(),
+                    style:
+                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.w600),
                   ),
-                )
-              ]
-            )
+                  Text('Repeticiones'),
+                ],
+              )),
+              Expanded(
+                  child: Column(
+                children: [
+                  Text(
+                    exercise.sets.toString(),
+                    style:
+                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.w600),
+                  ),
+                  Text('Series')
+                ],
+              )),
+            ],
+          ),
+          SizedBox(height: 20),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(exercise.description)),
+          SizedBox(height: 20),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.8 * 0.4,
+            child: WebView(
+              initialUrl:
+                  'https://www.youtube.com/embed/${exercise.videoUrl.split('?v=')[1]}',
+              javascriptMode: JavascriptMode.unrestricted,
+            ),
           )
-        );
+        ]));
   }
 
   Widget _exercisesGrid(BuildContext context) {
@@ -161,10 +136,12 @@ class RoutinePage extends StatelessWidget {
                           isScrollControlled: true,
                           builder: (BuildContext context) {
                             return Container(
-                              color: Colors.transparent, // Opcional: establece un color de fondo si lo deseas
+                              color: Colors
+                                  .transparent, // Opcional: establece un color de fondo si lo deseas
                               child: FractionallySizedBox(
                                 heightFactor: 0.65,
-                                widthFactor: 1, // Puedes ajustar la altura como desees
+                                widthFactor:
+                                    1, // Puedes ajustar la altura como desees
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -173,7 +150,11 @@ class RoutinePage extends StatelessWidget {
                                       topRight: const Radius.circular(20.0),
                                     ),
                                   ),
-                                  child: _exerciseDetail(context, control.exercises.value[index]), // Reemplaza 'TuContenidoAquí' con tu contenido deseado
+                                  child: SingleChildScrollView(
+                                      child: _exerciseDetail(
+                                          context,
+                                          control.exercises.value[
+                                              index])), // Reemplaza 'TuContenidoAquí' con tu contenido deseado
                                 ),
                               ),
                             );
@@ -235,11 +216,10 @@ class RoutinePage extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              Obx(() =>
-              Text(
-                control.bodyPartsAmount.value.toString(),
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ))
+              Obx(() => Text(
+                    control.bodyPartsAmount.value.toString(),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ))
             ],
           ),
         ),
@@ -252,10 +232,10 @@ class RoutinePage extends StatelessWidget {
                 'Total de\n Ejercicios',
                 style: TextStyle(fontSize: 16),
               ),
-              Obx(() =>Text(
-                control.exercisesAmount.value.toString(),
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ))
+              Obx(() => Text(
+                    control.exercisesAmount.value.toString(),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ))
             ],
           ),
         ),
@@ -284,12 +264,13 @@ class RoutinePage extends StatelessWidget {
             Row(children: [
               _routineResume(context),
             ]),
-            Divider( // Aquí se utiliza el widget Divider
-                color: Colors.grey, // Puedes personalizar el color
-                thickness: 2, // Grosor de la línea
-                indent: 20, // Espaciado a la izquierda
-                endIndent: 20, // Espaciado a la derecha
-              ),
+            Divider(
+              // Aquí se utiliza el widget Divider
+              color: Colors.grey, // Puedes personalizar el color
+              thickness: 2, // Grosor de la línea
+              indent: 20, // Espaciado a la izquierda
+              endIndent: 20, // Espaciado a la derecha
+            ),
             SizedBox(height: 15),
             Row(
               children: [
