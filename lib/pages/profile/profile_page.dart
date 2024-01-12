@@ -98,13 +98,18 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 5),
-                      Icon(
-                        Icons.edit,
-                        size:
-                            30.0, // Ajusta el tamaño del icono según tus necesidades
-                        color: Colors
-                            .grey, // Ajusta el color del icono según tus necesidades
-                      ),
+                      GestureDetector(
+                          onTap: () {
+                            // Tu lógica de manejo de clic aquí
+                            _bottomSheetMember(context);
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            size:
+                                30.0, // Ajusta el tamaño del icono según tus necesidades
+                            color: Colors
+                                .grey, // Ajusta el color del icono según tus necesidades
+                          )),
                     ]))
           ],
         ),
@@ -170,6 +175,75 @@ class ProfilePage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _bottomSheetMember(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+              height: 180,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              padding: EdgeInsets.all(20),
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height *
+                    0.5, // Ajusta según tus necesidades
+              ),
+              child: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Editar Datos del Miembro',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                    flex: 4,
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        labelText: 'Apellidos',
+                                        border: UnderlineInputBorder(),
+                                      ),
+                                    )),
+                                Expanded(flex: 1, child: Container()),
+                                Expanded(
+                                    flex: 4,
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        labelText: 'Nombres',
+                                        border: UnderlineInputBorder(),
+                                      ),
+                                    ))
+                              ],
+                            )
+                          ]))));
+        });
+  }
+
+  void _bottomSheetUser(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+              height: 180,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              padding: EdgeInsets.all(20),
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height *
+                    0.5, // Ajusta según tus necesidades
+              ),
+              child: SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [])));
+        });
   }
 
   void _bottomSheetPicture(BuildContext context) {
