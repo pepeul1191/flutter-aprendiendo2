@@ -9,6 +9,7 @@ import '../models/http/response_api.dart';
 
 class UserService {
   Future<ResponseApi> login(String user, String password) async {
+    print(BASE_URL + 'user/validate');
     final response = await http.post(
       Uri.parse('${BASE_URL}user/validate'), // Replace with your API URL
       headers: <String, String>{

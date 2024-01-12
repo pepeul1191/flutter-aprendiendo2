@@ -180,49 +180,114 @@ class ProfilePage extends StatelessWidget {
   void _bottomSheetMember(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        //isScrollControlled: true,
         builder: (BuildContext context) {
           return Container(
-              height: 180,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.white,
-              padding: EdgeInsets.all(20),
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height *
-                    0.5, // Ajusta según tus necesidades
-              ),
-              child: SingleChildScrollView(
-                  child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+            height: 450,
+            child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            body:
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.white,
+                padding: EdgeInsets.all(20),
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.45, // Ajusta según tus necesidades
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(children: [
+                        Expanded(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Editar Datos del Miembro',
+                              'Datos del Miembro',
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Expanded(
-                                    flex: 4,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        labelText: 'Apellidos',
-                                        border: UnderlineInputBorder(),
-                                      ),
-                                    )),
-                                Expanded(flex: 1, child: Container()),
-                                Expanded(
-                                    flex: 4,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        labelText: 'Nombres',
-                                        border: UnderlineInputBorder(),
-                                      ),
-                                    ))
-                              ],
-                            )
-                          ]))));
+                            Material(
+                              color: Colors.transparent,
+                              child: IconButton(
+                                icon: Icon(Icons.close, color: Colors.grey),
+                                onPressed: () {
+                                  control.closeBottomSheet(context);
+                                },
+                              ),
+                            ),
+                          ],
+                        ))
+                      ]),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Apellidos',
+                          border: UnderlineInputBorder(),
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Nombres',
+                          border: UnderlineInputBorder(),
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Correo',
+                          border: UnderlineInputBorder(),
+                        ),
+                      ),
+                      Row(children: [
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'DNI',
+                              border: UnderlineInputBorder(),
+                            ),
+                            enabled: false,
+                          )
+                        ),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Código',
+                              border: UnderlineInputBorder(),
+                              enabled: false,
+                            ),
+                          )
+                        ),
+                        Expanded(
+                          child: TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Teléfono',
+                            border: UnderlineInputBorder(),
+                          ),
+                        )),
+                      ],),
+                      SizedBox(height: 15),
+                      ElevatedButton(
+                        onPressed: () {
+                          control.saveChanges(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(double.infinity, 35),
+                          backgroundColor: secondaryColor,
+                        ),
+                        child: Text(
+                          'Guardar Cambios',
+                          style: TextStyle(color: Colors.black, fontSize: 14),
+                        ),
+                      ),
+                  ]
+                ))
+              )
+          )));
         });
   }
 
@@ -242,7 +307,9 @@ class ProfilePage extends StatelessWidget {
               child: SingleChildScrollView(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [])));
+                      children: [
+                        
+                      ])));
         });
   }
 
@@ -408,38 +475,12 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              SizedBox(height: 25),
               _buildCircularImageWithIcon(context),
               SizedBox(height: 15),
               _memberForm(context),
               SizedBox(height: 15),
               _userForm(context),
-              SizedBox(height: 15),
-              ElevatedButton(
-                onPressed: () {
-                  control.saveChanges(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 35),
-                  backgroundColor: secondaryColor,
-                ),
-                child: Text(
-                  'Guardar Cambios',
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // TODO
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 35),
-                  backgroundColor: secondaryColor,
-                ),
-                child: Text(
-                  'Cambiar Contraseña',
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                ),
-              )
             ],
           )),
     );
