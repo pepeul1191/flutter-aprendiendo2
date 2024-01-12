@@ -163,13 +163,18 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 5),
-                      Icon(
-                        Icons.edit,
-                        size:
-                            30.0, // Ajusta el tamaño del icono según tus necesidades
-                        color: Colors
-                            .grey, // Ajusta el color del icono según tus necesidades
-                      ),
+                      GestureDetector(
+                          onTap: () {
+                            // Tu lógica de manejo de clic aquí
+                            _bottomSheetUser(context);
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            size:
+                                30.0, // Ajusta el tamaño del icono según tus necesidades
+                            color: Colors
+                                .grey, // Ajusta el color del icono según tus necesidades
+                          )),
                     ]))
           ],
         ),
